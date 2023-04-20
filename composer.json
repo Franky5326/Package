@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Session\\": "src/"
+      "Collect\\": "src/"
     },
     "files": [
       "src/helpers.php"
