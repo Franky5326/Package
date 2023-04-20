@@ -1,83 +1,20 @@
 <?php
+namespace Session;
 
-namespace Collect;
-
-class Collect
+class Session
 {
-    private array $array = [];
-
-    public function __construct(array $array = [])
+    public static function set($name, $value): void
     {
-        $this->array = $array;
+        $_SESSION[$name] = $value;
     }
 
-    public function get($key = null)
+    public static function get($name)
     {
-        return $this->array[$key] ?? $this->array;
+        return $_SESSION[$name] ?? null;
     }
 
-    public function first()
+    public static function clear($name)
     {
-        return $this->array[array_key_first($this->array)];
-    }
-
-    public function count(): int
-    {
-        return count($this->array);
-    }
-
-    public function toArray(): array
-    {
-        return $this->array;
-    }
-
-    public function map(callable $callback): Collect
-    {
-        return new self(array_map($callback, $this->array));
-    }
-
-    public function each(callable $callback, ...$args): Collect
-    {
-        foreach ($this->array as $key => $item) {
-            $callback($item, $key, ...$args);
-        }
-        return $this;
-    }
-
-    public function push($value, $key = null): Collect
-    {
-        if (gettype($value) === 'array') {
-            $value = new self($value);
-        }
-        if ($key) {
-            $this->array[$key] = $value;
-        } else {
-            $this->array[] = $value;
-        }
-        return $this;
-    }
-
-    public function unshift($value): Collect
-    {
-        array_unshift($this->array, $value);
-        return $this;
-    }
-
-    public function shift(): Collect
-    {
-        array_shift($this->array);
-        return $this;
-    }
-
-    public function pop(): Collect
-    {
-        array_pop($this->array);
-        return $this;
-    }
-
-    public function splice($idx, $length = 1): Collect
-    {
-        array_splice($idx, $length);
-        return $this;
+        unset($_SESSION[$name]);
     }
 }
