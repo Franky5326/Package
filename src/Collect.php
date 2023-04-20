@@ -1,7 +1,7 @@
 <?php
-namespace Session;
+namespace Collect;
 
-class Session
+class Collect
 {
     public static function set($name, $value): void
     {
